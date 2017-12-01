@@ -21,6 +21,12 @@
     from mmall_cart
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getCartCheckedByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_cart
+    where user_id = #{userId} and checked = 1
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_cart
     where id = #{id,jdbcType=INTEGER}

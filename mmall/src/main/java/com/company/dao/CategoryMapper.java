@@ -2,6 +2,8 @@ package com.company.dao;
 
 import com.company.pojo.Category;
 
+import java.util.List;
+
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<Category> getChildrenNodes(Integer id);
+
+    List<Integer> selectChildrenNodes(Integer partentId);
 }

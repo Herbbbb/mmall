@@ -29,6 +29,29 @@
     from mmall_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where user_id = #{userId}
+  </select>
+  <select id="selectByOrderNoUserId" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where user_id = #{userId} and order_no = #{orderNo}
+  </select>
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+  </select>
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_order
+    where order_no = #{orderNo}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_order
     where id = #{id,jdbcType=INTEGER}
@@ -84,12 +107,11 @@
       <if test="closeTime != null" >
         close_time,
       </if>
-      <if test="createTime != null" >
+
         create_time,
-      </if>
-      <if test="updateTime != null" >
+
         update_time,
-      </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -128,12 +150,11 @@
       <if test="closeTime != null" >
         #{closeTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+
         now(),
-      </if>
-      <if test="updateTime != null" >
+
         now(),
-      </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.company.pojo.Order" >
@@ -175,9 +196,9 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+
         update_time = now(),
-      </if>
+
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
